@@ -1,0 +1,26 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+function LivestreamApp() {
+  const [overlay, setOverlay] = useState({});
+  const [videoUrl, setVideoUrl] = useState('your_rtsp_url_here');
+
+  useEffect(() => {
+    // Fetch overlay settings from the API based on the selected overlay ID
+    axios.get(`/overlay/${overlayId}`).then((response) => {
+      setOverlay(response.data);
+    });
+  }, [overlayId]);
+
+  return (
+    <div>
+      <video src={videoUrl} controls />
+      <div className="overlay" style={overlayStyles}>
+        {/* Render overlay content (e.g., logos and text) */}
+      </div>
+      {/* Add controls for play, pause, volume adjustment, and overlay settings */}
+    </div>
+  );
+}
+
+export default LivestreamApp;
